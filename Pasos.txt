@@ -1,0 +1,39 @@
+1. Crear Entorno virtual: virtualenv venv (venv nombre)
+2. Ejecutarlo con> .\venv\Scripts\activate
+3. instalar Flask: pip install flask
+4. Creamos carpetas templates, Static\css y Static\js
+5. Dentro de templates
+	Creamos layout.html    y ponemos el layout
+	Reemplazamos los css de la plantilla por el path. Ejemplo
+		<link rel="stylesheet" href="{{url_for('static', filename='css/maicons.css')}}">
+	Reemplazamos los js. Ejemplo:
+	  <script src="{{url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+	Reemplazmoas las imagenes. Ejemplo:
+       <img src="{{url_for('static', filename='img/banner_image_1.svg')}}" alt="">
+Fijarse que en los css no apuntes tambien a alguna fonts/maicons
+		  src:  url(../fonts/maicons.eot?c9nlkl); 
+
+
+6. Agregamos los bloques en el layout y las paginas
+	Layout:   	{% block blody%}   
+				{% endblock %}
+	Paginas:
+				{% extends 'layout.html' %}
+
+				{% block body %}
+				<h1> uso del template</h1>
+				{% endblock %}
+	
+7. En el formulario de contacto, agregar en cada campo el parametro name=... Ejemplo
+<input type="subject" id="subject" name="subject" class="form-control">
+	Luego en py:
+		subject = request.form["subject"]
+		
+En el form el metodo POST: method="POST" y la redireccion
+        <form action="{{ url_for('contact') }}" method="POST" class="contact-form py-5 px-lg-5">
+
+
+Para hacer el deploy, crear el requirement txt con:
+pip freeze >requirements.txt
+Luego para instalar: pip install -r requirements.txt
+
